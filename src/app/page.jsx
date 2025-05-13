@@ -1,4 +1,5 @@
 import Link from "next/link"
+import { connectToDB } from "@/lib/utils/db/connectToDB"
 
 const posts = [
   {
@@ -16,6 +17,7 @@ const posts = [
 ]
 
 export default async function Home() {
+  await connectToDB()
   return <div className="u-main-container u-padding-content-container">
     <h1 className="t-main-title">Stay up to date with AXORIA</h1>
     <p className="t-main-subtitle">Tech news and useful knowledge</p>
