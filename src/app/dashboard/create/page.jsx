@@ -1,18 +1,18 @@
 "use client"
-import React from 'react'
+import { addPost } from "@/lib/serverActions/blog/postServerAction";
 
 export default function page() {
 
-    function handleSubmit(e) {
+    async function handleSubmit(e) {
         e.preventDefault()
         const formData = new FormData(e.target)
         for (const [key, value] of formData.entries()) {
             console.log(key, ':', value);
 
         }
-
-
+        const result = await addPost(formData)
     }
+
 
     return (
         <main className='u-main-container bg-white p-7 mt-32 mb-44'>
