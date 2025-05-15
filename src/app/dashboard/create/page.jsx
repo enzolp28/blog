@@ -4,7 +4,7 @@ import { useState, useRef } from "react";
 
 export default function page() {
 
-    const [tags, setTags] = useState(["css", "js"])
+    const [tags, setTags] = useState([])
 
     const tagInputRef = useRef(null)
 
@@ -12,6 +12,7 @@ export default function page() {
     async function handleSubmit(e) {
         e.preventDefault()
         const formData = new FormData(e.target)
+        formData.set('tags', JSON.stringify(tags))
         for (const [key, value] of formData.entries()) {
             console.log(key, ':', value);
 

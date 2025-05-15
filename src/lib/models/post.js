@@ -13,7 +13,11 @@ const postSchema = new mongoose.Schema({
     slug: {
         type: String,
         unique: true
-    }
+    },
+    tags: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Tag"
+    }]
 }, { timestamps: true })
 
 postSchema.pre("save", async function (next) {
