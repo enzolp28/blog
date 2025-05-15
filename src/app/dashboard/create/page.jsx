@@ -21,9 +21,22 @@ export default function page() {
 
     function handleAddTag() {
 
+        const newTag = tagInputRef.current.value.trim().toLowerCase()
+        if (newTag !== "" && !tags.includes(newTag) && tags.length <= 4) {
+            setTags([...tags, newTag])
+            tagInputRef.current.value = ""
+        }
     }
-    function handleRemoveTag(tag) {
 
+    function handleRemoveTag(tagToRemove) {
+        setTags(tags.filter(tag => tag !== tagToRemove))
+    }
+
+    function handleEntreOnTagInput(e) {
+        if (e.key === "Enter") {
+            e.preventDefault()
+            handleAddTag()
+        }
     }
 
 
@@ -50,6 +63,7 @@ export default function page() {
                             id="tag"
                             placeholder="Add a tag"
                             ref={tagInputRef}
+                            onKeyDown={handleEntreOnTagInput}
                         />
                         <button
                             className="bg-indigo-500 hover:bg-indigo-700 text-white font-bold rounded p-4 mx-4"
