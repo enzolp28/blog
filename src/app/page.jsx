@@ -1,23 +1,30 @@
 import Link from "next/link"
 import { connectToDB } from "@/lib/utils/db/connectToDB"
+import { getPosts } from "@/lib/serverMethods/blog/postMethods"
 
-const posts = [
-  {
-    author: "John",
-    title: "5 css tricks",
-  },
-  {
-    author: "Walace",
-    title: "How to code navbar",
-  },
-  {
-    author: "Bruce",
-    title: "How to setup TS",
-  }
-]
+// const posts = [
+//   {
+//     author: "John",
+//     title: "5 css tricks",
+//   },
+//   {
+//     author: "Walace",
+//     title: "How to code navbar",
+//   },
+//   {
+//     author: "Bruce",
+//     title: "How to setup TS",
+//   }
+// ]
 
 export default async function Home() {
+
   await connectToDB()
+  const posts = await getPosts()
+  console.log("real", posts);
+
+
+
   return <div className="u-main-container u-padding-content-container">
     <h1 className="t-main-title">Stay up to date with AXORIA</h1>
     <p className="t-main-subtitle">Tech news and useful knowledge</p>
@@ -32,10 +39,10 @@ export default async function Home() {
                 {new Date().toLocaleDateString("en-EN", { year: "numeric", month: "long", day: "numeric" })}
               </time>
               <Link href={`/categories/author/${post.author}`} className="ml-auto text-base text-gray-700 hover:text-gray-600 whitespace-nowrap truncate">
-                {post.author}
+                John
               </Link>
             </div>
-            <Link href={`/article/${post.title}`} className="inline-block mt-6 text-xl font-semibold text-zinc-800 hover:text-zinc-600">{post.title}</Link>
+            <Link href={`/article/${post.slug}`} className="inline-block mt-6 text-xl font-semibold text-zinc-800 hover:text-zinc-600">{post.title}</Link>
           </div>
         </li>
       ))}

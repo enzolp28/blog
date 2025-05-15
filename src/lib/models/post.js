@@ -35,4 +35,4 @@ postSchema.pre("save", async function (next) {
         next()
     }
 })
-export const Post = mongoose.model?.Post || mongoose.model("Post", postSchema)
+export const Post = mongoose.models?.Post || mongoose.model("Post", postSchema)

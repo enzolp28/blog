@@ -1,7 +1,13 @@
 "use client"
 import { addPost } from "@/lib/serverActions/blog/postServerAction";
+import { useState, useRef } from "react";
 
 export default function page() {
+
+    const [tags, setTags] = useState(["css", "js"])
+
+    const tagInputRef = useRef(null)
+
 
     async function handleSubmit(e) {
         e.preventDefault()
@@ -11,6 +17,13 @@ export default function page() {
 
         }
         const result = await addPost(formData)
+    }
+
+    function handleAddTag() {
+
+    }
+    function handleRemoveTag(tag) {
+
     }
 
 
@@ -27,6 +40,35 @@ export default function page() {
                     placeholder='Title'
                     required
                 />
+
+                <div className="mb-10">
+                    <label htmlFor="tag" className="f-label">Add a tag(s) (optional,max 5)</label>
+                    <div className="flex">
+                        <input
+                            type="text"
+                            className="shadow border rounded p-3 text-gray-700 focus:outline-slate-400"
+                            id="tag"
+                            placeholder="Add a tag"
+                            ref={tagInputRef}
+                        />
+                        <button
+                            className="bg-indigo-500 hover:bg-indigo-700 text-white font-bold rounded p-4 mx-4"
+                            onClick={handleAddTag}
+                            type="button"
+                        >Add</button>
+                        <div className="flex items-center grow whitespace-nowrap overflow-y-auto shadow border rounded px-3">
+                            {tags.map(tag => (
+                                <span key={tag} className="inline-block whitespace-nowrap bg-gray-200 text-gray-700 rounded-full px-3 py-1 text-sm font-semibold mr-2">
+                                    {tag}
+                                    <button type="button" onClick={() => handleRemoveTag(tag)} className="text-red-500 ml-2">
+                                        &times;
+                                    </button>
+                                </span>
+                            ))}
+                        </div>
+
+                    </div>
+                </div>
 
                 <label htmlFor="markdownArticle" className='f-label'>Write your article using markdown (do not repeat the already given title)</label>
                 <a href="https://www.markdownguide.org/cheat-sheet/" target='_blank' className='block mb-4 text-blue-600'>How to use the markdown syntax ?</a>
