@@ -24,7 +24,6 @@ export default async function Home() {
   console.log("real", posts);
 
 
-
   return <div className="u-main-container u-padding-content-container">
     <h1 className="t-main-title">Stay up to date with AXORIA</h1>
     <p className="t-main-subtitle">Tech news and useful knowledge</p>
